@@ -28,5 +28,5 @@ for verse_text, verse_index in matches:
 with open("ashtavakra_verses.json", "w", encoding="utf-8") as f:
     json.dump(verses, f, ensure_ascii=False, indent=2)
 
-print("✅ JSON file saved as 'ashtavakra_verses.json'")
+print("JSON file saved as 'ashtavakra_verses.json'")
 
