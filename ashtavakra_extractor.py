@@ -6,7 +6,6 @@ url = "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/pla
 response = requests.get(url)
 
 text_content = response.text
-
 lines = text_content.splitlines()
 
 verses = []
@@ -23,7 +22,7 @@ for line in lines:
     if match:
         if current_verse and verse_index:
             verses.append({
-                "verse": "\n".join(current_verse),
+                "verse": " ".join(current_verse).strip(),
                 "index": verse_index
             })
         
@@ -35,7 +34,7 @@ for line in lines:
 
 if current_verse and verse_index:
     verses.append({
-        "verse": "\n".join(current_verse),
+        "verse": " ".join(current_verse).strip(),
         "index": verse_index
     })
 
