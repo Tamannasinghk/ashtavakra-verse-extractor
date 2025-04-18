@@ -1,1 +1,0 @@
-# ashtavakra-verse-extractor
