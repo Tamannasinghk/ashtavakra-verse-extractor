@@ -1,49 +1,33 @@
-import requests
 import re
 import json
 
-url = "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_aSTAvakragItA.txt"
-response = requests.get(url)
+results = []
 
-text_content = response.text
+with open('sa_aSTAvakragItA.txt', 'r', encoding='utf-8') as f:
+    lines = f.readlines()
+    verse_text = ""
+    verse_index = None
 
-lines = text_content.splitlines()
-verses = []
-current_verse = []
+    for line in lines:
+       
+        if not line.strip() or line.startswith("#"):
+            continue
+        match = re.match(r"(.*)(// Avg_(\d+\.\d+))$", line.strip())
 
-for line in lines:
-    line = line.strip()  
-    
-    
-    if not line or line.startswith("{") or line.startswith("#"):
-        continue
-    
-    
-    match = re.search(r'^(.*)//\s*Avg_(\d+\.\d+)', line)
-    if match:
-        
-        if current_verse:
-            verses.append({
-                "verse": "\n".join(current_verse),  
+        if match:
+            
+            verse_text += match.group(1).strip()
+            verse_index = match.group(3)
+            
+            results.append({
+                "verse": verse_text.strip(),
                 "index": verse_index
             })
-        
-        current_verse = [match.group(1).strip()]
-        verse_index = match.group(2).strip()
-    else:
-        
-        if current_verse:
-            current_verse.append(line.strip())
+            verse_text = ""
+            verse_index = None
+        else:
+            verse_text += line.strip() + " "
 
-if current_verse:
-    verses.append({
-        "verse": "\n".join(current_verse),
-        "index": verse_index
-    })
+with open('output.json', 'w', encoding='utf-8') as json_file:
+    json.dump(results, json_file, ensure_ascii=False, indent=2)
 
-json_output = json.dumps(verses, indent=2, ensure_ascii=False)
-
-with open("ashtavakra_verses.json", "w", encoding="utf-8") as f:
-    f.write(json_output)
-
-print("Extraction complete and saved to 'ashtavakra_verses.json'")
