@@ -1,0 +1,22 @@
+
+Edge Cases & How We Handled Them
+
+1. **Header Metadata**
+   - **Issue**: The text file includes a lot of header/license info before the actual verses.
+   - **Solution**: We skip all content before the "aṣṭāvakragītā" marker to begin cleanly from the actual verses.
+
+2. **Multiline Verses**
+   - **Issue**: Some verses are written in two lines but extracted as a single block.
+   - **Solution**: We use regex with `re.DOTALL` so it captures multiline blocks correctly.
+
+3. **Non-standard formatting**
+   - **Issue**: The verse and index are joined with "// Avg_x.x", which isn’t a standard delimiter.
+   - **Solution**: Regex pattern `r"(.*?)//\s*Avg_(\d+\.\d+)"` captures everything before `//` and extracts the index correctly.
+
+4. **Unicode Sanskrit characters**
+   - **Issue**: Some tools might break with Unicode handling.
+   - **Solution**: Used `ensure_ascii=False` in `json.dump()` to keep the original Devanagari script intact.
+
+5. **Clean file output**
+   - **Issue**: Output could have weird line breaks or extra whitespace.
+   - **Solution**: `.strip().replace("", "")` is applied to clean each verse.
