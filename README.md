@@ -49,10 +49,18 @@ Each item in the JSON looks like:
 
 ```json
 {
-  "verse": "na tvaṃ viprādiko varṇo nāśramī nākṣagocaraḥ
-asaṅgo 'si nirākāro viśvasākṣī sukhī bhava",
-  "index": "1.5"
-}
+    "verse": "kathaṃ jñānam avāpto 'ti kathaṃ muktir bhaviṣyati \nvairāgyaṃ ca kathaṃ prāptam etad brūhi mama prabho",
+    "index": "1.1"
+  },
+  {
+    "verse": "muktim icchasi cet tāta viṣayān viṣavat tyaja \nkṣamārjavadayātoṣasatyaṃ pīyūṣavad bhaja",
+    "index": "1.2"
+  },
+  {
+    "verse": "na pṛthvī na jalaṃ nāgnir na vāyur dyaur na vā bhavān \neṣāṃ sākṣiṇam ātmānaṃ cidrūpaṃ viddhi muktaye",
+    "index": "1.3"
+  },
+...............
 ```
 
 ---
